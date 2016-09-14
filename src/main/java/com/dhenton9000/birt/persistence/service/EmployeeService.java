@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.dhenton9000.birt.service;
+package com.dhenton9000.birt.persistence.service;
 
-import com.dhenton9000.birt.entities.Employees;
+import com.dhenton9000.birt.persistence.entities.Employees;
 import java.util.List;
 
 /**

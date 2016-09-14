@@ -62,11 +62,11 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
     
     <!-- this allows access to the sessionFactory, most likely via the @PersistenceContext annotation -->
     <util:property-path id="sessionFactory" path="entityManagerFactory.sessionFactory"/>
-    <context:component-scan base-package="com.dhenton9000.restaurant ,com.dhenton9000.jpa.dao.hibernate" 
+    <context:component-scan base-package="com.dhenton9000.birt.persistence, com.dhenton9000.jpa.dao.hibernate" 
                             name-generator="com.dhenton9000.jpa.util.WithoutTrailingImplBeanNameGenerator"/>
     <tx:annotation-driven/>
     <context:mbean-server/>
-    <context:mbean-export default-domain="dhh_restaurant" registration="ignoreExisting"/>
+    <context:mbean-export default-domain="dhh_birt" registration="ignoreExisting"/>
     <context:spring-configured/>
     <context:annotation-config/>
     <!-- services 

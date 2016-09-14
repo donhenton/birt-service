@@ -1,4 +1,4 @@
-package com.dhenton9000.jersey.template.util;
+package com.dhenton9000.birt.jersey.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;

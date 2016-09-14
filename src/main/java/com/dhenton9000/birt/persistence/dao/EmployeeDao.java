@@ -1,7 +1,7 @@
 
-package com.dhenton9000.birt.dao;
+package com.dhenton9000.birt.persistence.dao;
 
-import com.dhenton9000.birt.entities.Employees;
+import com.dhenton9000.birt.persistence.entities.Employees;
 import com.dhenton9000.jpa.dao.support.GenericDao;
 import java.util.List;
 

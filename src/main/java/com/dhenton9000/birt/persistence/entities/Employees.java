@@ -1,7 +1,7 @@
 /**
  * register this is classes/META-INF/persistence.xml
  */
-package com.dhenton9000.birt.entities;
+package com.dhenton9000.birt.persistence.entities;
 
 import com.dhenton9000.jpa.domain.Identifiable;
 import java.io.Serializable;
@@ -43,7 +43,7 @@ public class Employees implements Serializable, Identifiable<Integer> {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employees_employeenumber_seq")
     @SequenceGenerator(name = "employees_employeenumber_seq", sequenceName = "employees_employeenumber_seq", allocationSize = 1)
     @Basic(optional = false)
-    @Column(name = "ID", nullable = false)
+    @Column(name = "EMPLOYEENUMBER", nullable = false)
     public Integer getEmployeeNumber() {
         return this.employeeNumber;
     }

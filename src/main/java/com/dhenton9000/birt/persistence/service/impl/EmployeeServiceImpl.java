@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.dhenton9000.birt.service.impl;
+package com.dhenton9000.birt.persistence.service.impl;
 
-import com.dhenton9000.birt.dao.EmployeeDao;
-import com.dhenton9000.birt.entities.Employees;
+import com.dhenton9000.birt.persistence.dao.EmployeeDao;
+import com.dhenton9000.birt.persistence.entities.Employees;
 import com.dhenton9000.jpa.dao.support.GenericDao;
 import com.dhenton9000.jpa.service.support.GenericEntityServiceImpl;
 import java.util.List;
@@ -14,7 +14,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.dhenton9000.birt.service.EmployeeService;
+import com.dhenton9000.birt.persistence.service.EmployeeService;
 
 @Service
 public class EmployeeServiceImpl   extends GenericEntityServiceImpl<Employees, Integer> implements EmployeeService {

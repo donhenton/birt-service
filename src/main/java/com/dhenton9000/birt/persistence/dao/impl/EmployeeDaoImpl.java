@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.dhenton9000.birt.dao.impl;
+package com.dhenton9000.birt.persistence.dao.impl;
 
  
-import com.dhenton9000.birt.dao.EmployeeDao;
-import com.dhenton9000.birt.entities.Employees;
+import com.dhenton9000.birt.persistence.dao.EmployeeDao;
+import com.dhenton9000.birt.persistence.entities.Employees;
 import com.dhenton9000.jpa.dao.hibernate.BaseHibernateGenericDaoImpl;
 import com.dhenton9000.jpa.dao.support.NamedQueryUtil;
 import com.dhenton9000.jpa.dao.support.SearchTemplate;
@@ -47,7 +47,7 @@ public class EmployeeDaoImpl
     public List<Employees> getAllEmployees() {
 
         SearchTemplate template = new SearchTemplate();
-        template.setNamedQuery("Restaurant.findAll");
+        template.setNamedQuery("Employees.findAll");
 
         List<Employees> res = this.find(new Employees(), template);
 

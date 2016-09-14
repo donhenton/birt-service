@@ -3,14 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.dhenton9000.jersey.template.config;
+package com.dhenton9000.birt.jersey.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
-import com.dhenton9000.jersey.template.util.CORSResponseFilter;
-import com.dhenton9000.jersey.template.util.LoggingResponseFilter;
+import com.dhenton9000.birt.jersey.util.CORSResponseFilter;
+import com.dhenton9000.birt.jersey.util.LoggingResponseFilter;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import io.swagger.annotations.Info;
 import io.swagger.jaxrs.config.BeanConfig;
  
 
@@ -35,6 +34,7 @@ public class JerseyConfig extends ResourceConfig {
         register(RequestContextFilter.class);
         register(new JsonProvider());
         packages("com.dhenton9000.jersey.template.resources");
+        packages("com.dhenton9000.birt.jersey.resources");
         packages("io.swagger.jaxrs.listing");
 		
         register(LoggingResponseFilter.class);
@@ -49,6 +49,7 @@ public class JerseyConfig extends ResourceConfig {
         beanConfig.setBasePath("/birt-service"); //this adjusts swagger output by the web context
         beanConfig.setResourcePackage("io.swagger.resources");
         beanConfig.setResourcePackage("com.dhenton9000.jersey.template.resources");
+        beanConfig.setResourcePackage("com.dhenton9000.birt.jersey.resources");
         beanConfig.setScan(true);
 
 
