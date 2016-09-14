@@ -42,14 +42,15 @@ public class JerseyConfig extends ResourceConfig {
         register(SpringComponentProvider.class);
 
         BeanConfig beanConfig = new BeanConfig();
-        beanConfig.setVersion("1.0.2");
+        beanConfig.setVersion("1.0.0");
         beanConfig.setDescription("BIRT Database Service");
         beanConfig.setSchemes(new String[]{"http"});
         beanConfig.setHost("localhost:8090");
         beanConfig.setBasePath("/birt-service"); //this adjusts swagger output by the web context
         beanConfig.setResourcePackage("io.swagger.resources");
-        beanConfig.setResourcePackage("com.dhenton9000.jersey.template.resources");
-        beanConfig.setResourcePackage("com.dhenton9000.birt.jersey.resources");
+       // comma delimited list of packages
+       // beanConfig.setResourcePackage("com.dhenton9000.birt.jersey.resources,com.dhenton9000.jersey.template.resources");
+       beanConfig.setResourcePackage("com.dhenton9000.birt.jersey.resources");
         beanConfig.setScan(true);
 
 

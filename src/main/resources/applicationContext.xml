@@ -27,12 +27,7 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
     <bean class="java.net.URI" id="dbUrl">
         <constructor-arg value="${DATABASE_URL}"/>
     </bean>
-    
-    
-    <bean class="com.dhenton9000.jersey.template.service.SpringService" />
-    
-    
-    
+        
     <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor">
         <description>Enable exception translation for beans annotated with @Repository</description>
     </bean>

@@ -4,6 +4,7 @@
 package com.dhenton9000.birt.persistence.entities;
 
 import com.dhenton9000.jpa.domain.Identifiable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Basic;
@@ -18,9 +19,13 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
+ 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 @Entity
 @Table(name = "Employees")
+@ApiModel(description = "the employee entity")
 @NamedQueries({
     @NamedQuery(name = "Employees.findAll", query = "SELECT e FROM Employees e"),
     @NamedQuery(name = "Employees.findByid", query = "SELECT e FROM Employees e WHERE e.employeeNumber = :id")})
@@ -44,10 +49,11 @@ public class Employees implements Serializable, Identifiable<Integer> {
     @SequenceGenerator(name = "employees_employeenumber_seq", sequenceName = "employees_employeenumber_seq", allocationSize = 1)
     @Basic(optional = false)
     @Column(name = "EMPLOYEENUMBER", nullable = false)
+    @ApiModelProperty(example = "1", required = true)
     public Integer getEmployeeNumber() {
         return this.employeeNumber;
     }
-    
+
     public void setEmployeeNumber(Integer id) {
         this.employeeNumber = id;
 
@@ -55,6 +61,8 @@ public class Employees implements Serializable, Identifiable<Integer> {
 
     @Override
     @Transient
+    @JsonIgnore
+     @ApiModelProperty(hidden =true)
     public Integer getPrimaryKey() {
         if (getEmployeeNumber() != null) {
             return getEmployeeNumber();
@@ -70,6 +78,8 @@ public class Employees implements Serializable, Identifiable<Integer> {
 
     @Override
     @Transient
+    @JsonIgnore
+     @ApiModelProperty(hidden =true)
     public boolean isPrimaryKeySet() {
         return this.employeeNumber != null;
     }
@@ -78,9 +88,14 @@ public class Employees implements Serializable, Identifiable<Integer> {
      * @return the lastName
      */
     @Column(name = "LASTNAME", length = 50)
+    @ApiModelProperty(example = "Doe", required = true)
     @Basic(optional = false)
     public String getLastName() {
-        return lastName;
+        if (lastName != null)
+            return lastName.trim();
+        else
+            
+            return lastName;
     }
 
     /**
@@ -94,9 +109,14 @@ public class Employees implements Serializable, Identifiable<Integer> {
      * @return the firstName
      */
     @Column(name = "FIRSTNAME", length = 50)
+    @ApiModelProperty(example = "Jane", required = true)
     @Basic(optional = false)
     public String getFirstName() {
-        return firstName;
+        if (firstName != null)
+            return firstName.trim();
+        else
+            
+            return firstName;
     }
 
     /**
@@ -110,9 +130,15 @@ public class Employees implements Serializable, Identifiable<Integer> {
      * @return the extension
      */
     @Column(name = "EXTENSION", length = 10)
-     @Basic(optional = false)
+    @ApiModelProperty(example = "9999", required = true)
+    @Basic(optional = false)
     public String getExtension() {
-        return extension;
+         
+         if (extension != null)
+            return extension.trim();
+        else
+            
+            return extension;
     }
 
     /**
@@ -126,9 +152,14 @@ public class Employees implements Serializable, Identifiable<Integer> {
      * @return the email
      */
     @Column(name = "EMAIL", length = 100)
-     @Basic(optional = false)
+    @ApiModelProperty(example = "jane.doe@whattiz.com", required = true)
+    @Basic(optional = false)
     public String getEmail() {
-        return email;
+        if (email != null)
+            return email.trim();
+        else
+            
+            return email;
     }
 
     /**
@@ -142,9 +173,15 @@ public class Employees implements Serializable, Identifiable<Integer> {
      * @return the officeCode
      */
     @Column(name = "OFFICECODE", length = 20)
-     @Basic(optional = false)
+    @ApiModelProperty(example = "35", required = false)
+    @Basic(optional = false)
     public String getOfficeCode() {
-        return officeCode;
+        
+        if (officeCode != null)
+            return officeCode.trim();
+        else
+            
+            return officeCode;
     }
 
     /**
@@ -158,9 +195,14 @@ public class Employees implements Serializable, Identifiable<Integer> {
      * @return the jobTitle
      */
     @Column(name = "JOBTITLE", length = 50)
-     @Basic(optional = false)
+    @ApiModelProperty(example = "humble servant", required = true)
+    @Basic(optional = false)
     public String getJobTitle() {
-        return jobTitle;
+        if (jobTitle != null)
+            return jobTitle.trim();
+        else
+            
+            return jobTitle;
     }
 
     /**
@@ -173,7 +215,7 @@ public class Employees implements Serializable, Identifiable<Integer> {
     /**
      * @return the reportsTo
      */
-    @Column(name = "REPORTSTO", length = 50,nullable=true)
+    @Column(name = "REPORTSTO", length = 50, nullable = true)
     public Integer getReportsTo() {
         return reportsTo;
     }
@@ -215,9 +257,4 @@ public class Employees implements Serializable, Identifiable<Integer> {
         return "Employee{" + "employeeNumber=" + employeeNumber + ", lastName=" + lastName + '}';
     }
 
-    
-    
-    
-    
-    
 }
