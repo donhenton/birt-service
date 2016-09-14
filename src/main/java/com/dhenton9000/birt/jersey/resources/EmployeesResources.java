@@ -35,7 +35,7 @@ public class EmployeesResources {
     @GET
     @Path("/get/all")
     @Produces({MediaType.APPLICATION_JSON})
-    @ApiOperation(value = "Get All Employees")
+    @ApiOperation(value = "Get All Employees",notes = "lists all employees at Classic Cars")
    
     public   List<Employees> getAllEmployees() {
         return springService.getAllEmployees();
