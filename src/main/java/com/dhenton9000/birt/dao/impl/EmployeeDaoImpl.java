@@ -7,7 +7,7 @@ package com.dhenton9000.birt.dao.impl;
 
  
 import com.dhenton9000.birt.dao.EmployeeDao;
-import com.dhenton9000.birt.entities.Employee;
+import com.dhenton9000.birt.entities.Employees;
 import com.dhenton9000.jpa.dao.hibernate.BaseHibernateGenericDaoImpl;
 import com.dhenton9000.jpa.dao.support.NamedQueryUtil;
 import com.dhenton9000.jpa.dao.support.SearchTemplate;
@@ -21,13 +21,13 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class EmployeeDaoImpl
-        extends BaseHibernateGenericDaoImpl<Employee, Integer>
+        extends BaseHibernateGenericDaoImpl<Employees, Integer>
         implements EmployeeDao {
 
     private static Logger  log = LoggerFactory.getLogger(EmployeeDaoImpl.class);
 
     public EmployeeDaoImpl() {
-        super(Employee.class);
+        super(Employees.class);
     }
 
     @PersistenceContext
@@ -44,12 +44,12 @@ public class EmployeeDaoImpl
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<Employee> getAllEmployees() {
+    public List<Employees> getAllEmployees() {
 
         SearchTemplate template = new SearchTemplate();
         template.setNamedQuery("Restaurant.findAll");
 
-        List<Employee> res = this.find(new Employee(), template);
+        List<Employees> res = this.find(new Employees(), template);
 
         return res;
     }

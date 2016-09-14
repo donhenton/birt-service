@@ -6,7 +6,7 @@
 package com.dhenton9000.birt.service.impl;
 
 import com.dhenton9000.birt.dao.EmployeeDao;
-import com.dhenton9000.birt.entities.Employee;
+import com.dhenton9000.birt.entities.Employees;
 import com.dhenton9000.jpa.dao.support.GenericDao;
 import com.dhenton9000.jpa.service.support.GenericEntityServiceImpl;
 import java.util.List;
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 import com.dhenton9000.birt.service.EmployeeService;
 
 @Service
-public class EmployeeServiceImpl   extends GenericEntityServiceImpl<Employee, Integer> implements EmployeeService {
+public class EmployeeServiceImpl   extends GenericEntityServiceImpl<Employees, Integer> implements EmployeeService {
 
     @PersistenceContext()
     private EntityManager entityManager;
@@ -27,7 +27,7 @@ public class EmployeeServiceImpl   extends GenericEntityServiceImpl<Employee, In
  
 
     @Override
-    public List<Employee> getAllEmployees() {
+    public List<Employees> getAllEmployees() {
 
         return getEmployeeDao().getAllEmployees();
     }
@@ -40,18 +40,18 @@ public class EmployeeServiceImpl   extends GenericEntityServiceImpl<Employee, In
     }
 
     @Override
-    public GenericDao<Employee, Integer> getDao() {
+    public GenericDao<Employees, Integer> getDao() {
          return employeeDao;
     }
 
     @Override
-    public Employee getNew() {
-         return new Employee();
+    public Employees getNew() {
+         return new Employees();
     }
 
     @Override
-    public Employee getNewWithDefaults() {
-        return new Employee();
+    public Employees getNewWithDefaults() {
+        return new Employees();
     }
     
 }

@@ -1,7 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * register this is classes/META-INF/persistence.xml
  */
 package com.dhenton9000.birt.entities;
 
@@ -25,10 +23,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "Employees")
 @NamedQueries({
     @NamedQuery(name = "Employees.findAll", query = "SELECT e FROM Employees e"),
-    @NamedQuery(name = "Employees.findByid", query = "SELECT e FROM Employees e WHERE e.employeeId = :id")})
+    @NamedQuery(name = "Employees.findByid", query = "SELECT e FROM Employees e WHERE e.employeeNumber = :id")})
 
 @XmlRootElement
-public class Employee implements Serializable, Identifiable<Integer> {
+public class Employees implements Serializable, Identifiable<Integer> {
 
     private static final long serialVersionUID = 1L;
     private Integer employeeNumber;
@@ -48,6 +46,11 @@ public class Employee implements Serializable, Identifiable<Integer> {
     @Column(name = "ID", nullable = false)
     public Integer getEmployeeNumber() {
         return this.employeeNumber;
+    }
+    
+    public void setEmployeeNumber(Integer id) {
+        this.employeeNumber = id;
+
     }
 
     @Override
@@ -200,7 +203,7 @@ public class Employee implements Serializable, Identifiable<Integer> {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Employee other = (Employee) obj;
+        final Employees other = (Employees) obj;
         if (!Objects.equals(this.employeeNumber, other.employeeNumber)) {
             return false;
         }

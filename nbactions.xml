@@ -10,6 +10,7 @@
             </goals>
             <properties>
                 <skipTests>true</skipTests>
+                <Env.DATABASE_URL>postgres://test:test@localhost:5433/jdatabase</Env.DATABASE_URL>
             </properties>
         </action>
     </actions>

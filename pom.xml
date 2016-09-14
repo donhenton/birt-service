@@ -93,7 +93,18 @@
             
         <!-- hibernate/jpa --> 
         
-        
+        <dependency>
+            <groupId>c3p0</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>0.9.1.2</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.3-1100-jdbc41</version>
+            <type>jar</type>
+        </dependency>
         
         
         <dependency>
@@ -166,8 +177,20 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
             <version>${spring.version}</version>
+        </dependency> 
+       
+        <!-- Various Application Context utilities, including EhCache, JavaMail, 
+        Quartz, and Freemarker integration Define this if you need any of these integrations -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${spring.version}</version>
         </dependency>
-        
+        <dependency> 
+            <groupId>org.springframework</groupId> 
+            <artifactId>spring-aspects</artifactId> 
+            <version>${spring.version}</version> 
+        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
@@ -234,6 +257,14 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>${jetty.version}</version>
                 <configuration>
+                    <!--
+                    <systemProperties>
+                        <systemProperty>
+                            <key>DATABASE_URL</key>
+                            <value>postgres://test:test@localhost:5433/jdatabase</value>
+                        </systemProperty>
+                    </systemProperties>
+                    -->
                     <httpConnector>
                         <port>${jetty.port}</port>
                     </httpConnector>

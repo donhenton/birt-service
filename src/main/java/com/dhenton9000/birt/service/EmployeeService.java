@@ -5,7 +5,7 @@
  */
 package com.dhenton9000.birt.service;
 
-import com.dhenton9000.birt.entities.Employee;
+import com.dhenton9000.birt.entities.Employees;
 import java.util.List;
 
 /**
@@ -14,5 +14,5 @@ import java.util.List;
  */
 public interface EmployeeService {
     
-    public List<Employee> getAllEmployees();
+    public List<Employees> getAllEmployees();
 }
