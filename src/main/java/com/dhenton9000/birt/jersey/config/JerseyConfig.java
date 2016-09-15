@@ -33,7 +33,7 @@ public class JerseyConfig extends ResourceConfig {
     public JerseyConfig() {
         register(RequestContextFilter.class);
         register(new JsonProvider());
-        packages("com.dhenton9000.jersey.template.resources");
+     
         packages("com.dhenton9000.birt.jersey.resources");
         packages("io.swagger.jaxrs.listing");
 		
@@ -47,10 +47,10 @@ public class JerseyConfig extends ResourceConfig {
         beanConfig.setSchemes(new String[]{"http"});
         //beanConfig.setHost("localhost:8090");
         beanConfig.setBasePath("/"); //this adjusts swagger output by the web context
-        beanConfig.setResourcePackage("io.swagger.resources");
+       // beanConfig.setResourcePackage("io.swagger.resources");
        // comma delimited list of packages
        // beanConfig.setResourcePackage("com.dhenton9000.birt.jersey.resources,com.dhenton9000.jersey.template.resources");
-       beanConfig.setResourcePackage("com.dhenton9000.birt.jersey.resources");
+       beanConfig.setResourcePackage("io.swagger.resources,com.dhenton9000.birt.jersey.resources");
         beanConfig.setScan(true);
 
 

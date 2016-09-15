@@ -19,9 +19,13 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
- 
+import static com.dhenton9000.jpa.util.EntityUtils.trimField;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 @Table(name = "Employees")
@@ -39,9 +43,9 @@ public class Employees implements Serializable, Identifiable<Integer> {
     private String firstName;
     private String extension;
     private String email;
-    private String officeCode;
     private String jobTitle;
     private Integer reportsTo;
+    private Offices offices;
 
     @Id
 
@@ -62,7 +66,7 @@ public class Employees implements Serializable, Identifiable<Integer> {
     @Override
     @Transient
     @JsonIgnore
-     @ApiModelProperty(hidden =true)
+    @ApiModelProperty(hidden = true)
     public Integer getPrimaryKey() {
         if (getEmployeeNumber() != null) {
             return getEmployeeNumber();
@@ -79,7 +83,7 @@ public class Employees implements Serializable, Identifiable<Integer> {
     @Override
     @Transient
     @JsonIgnore
-     @ApiModelProperty(hidden =true)
+    @ApiModelProperty(hidden = true)
     public boolean isPrimaryKeySet() {
         return this.employeeNumber != null;
     }
@@ -91,11 +95,7 @@ public class Employees implements Serializable, Identifiable<Integer> {
     @ApiModelProperty(example = "Doe", required = true)
     @Basic(optional = false)
     public String getLastName() {
-        if (lastName != null)
-            return lastName.trim();
-        else
-            
-            return lastName;
+        return trimField(this.lastName);
     }
 
     /**
@@ -112,11 +112,8 @@ public class Employees implements Serializable, Identifiable<Integer> {
     @ApiModelProperty(example = "Jane", required = true)
     @Basic(optional = false)
     public String getFirstName() {
-        if (firstName != null)
-            return firstName.trim();
-        else
-            
-            return firstName;
+
+        return trimField(firstName);
     }
 
     /**
@@ -133,12 +130,8 @@ public class Employees implements Serializable, Identifiable<Integer> {
     @ApiModelProperty(example = "9999", required = true)
     @Basic(optional = false)
     public String getExtension() {
-         
-         if (extension != null)
-            return extension.trim();
-        else
-            
-            return extension;
+
+        return trimField(extension);
     }
 
     /**
@@ -155,11 +148,9 @@ public class Employees implements Serializable, Identifiable<Integer> {
     @ApiModelProperty(example = "jane.doe@whattiz.com", required = true)
     @Basic(optional = false)
     public String getEmail() {
-        if (email != null)
-            return email.trim();
-        else
-            
-            return email;
+
+        return trimField(email);
+
     }
 
     /**
@@ -169,27 +160,7 @@ public class Employees implements Serializable, Identifiable<Integer> {
         this.email = email;
     }
 
-    /**
-     * @return the officeCode
-     */
-    @Column(name = "OFFICECODE", length = 20)
-    @ApiModelProperty(example = "35", required = false)
-    @Basic(optional = false)
-    public String getOfficeCode() {
-        
-        if (officeCode != null)
-            return officeCode.trim();
-        else
-            
-            return officeCode;
-    }
-
-    /**
-     * @param officeCode the officeCode to set
-     */
-    public void setOfficeCode(String officeCode) {
-        this.officeCode = officeCode;
-    }
+ 
 
     /**
      * @return the jobTitle
@@ -198,11 +169,9 @@ public class Employees implements Serializable, Identifiable<Integer> {
     @ApiModelProperty(example = "humble servant", required = true)
     @Basic(optional = false)
     public String getJobTitle() {
-        if (jobTitle != null)
-            return jobTitle.trim();
-        else
-            
-            return jobTitle;
+
+        return trimField(jobTitle);
+
     }
 
     /**
@@ -257,4 +226,31 @@ public class Employees implements Serializable, Identifiable<Integer> {
         return "Employee{" + "employeeNumber=" + employeeNumber + ", lastName=" + lastName + '}';
     }
 
+    
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "OFFICECODE", referencedColumnName = "OFFICECODE", nullable = false,
+            insertable = false, updatable = false)
+    @JsonBackReference
+    public Offices getOffices() {
+        return offices;
+    }
+
+    /**
+     * @param parent the parent to set
+     */
+    public void setRestaurant(Offices parent) {
+        this.setOffices(parent);
+    }
+
+    /**
+     * @param offices the offices to set
+     */
+    public void setOffices(Offices offices) {
+        this.offices = offices;
+    }
+
+    
+    
+    
+    
 }

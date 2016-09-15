@@ -3,6 +3,7 @@
   <persistence-unit name="Birt_Service_PU" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <class>com.dhenton9000.birt.persistence.entities.Employees</class>
+    <class>com.dhenton9000.birt.persistence.entities.Offices</class>
     <properties>
       <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
       <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>

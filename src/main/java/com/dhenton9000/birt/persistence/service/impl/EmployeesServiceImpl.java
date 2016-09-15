@@ -14,10 +14,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.dhenton9000.birt.persistence.service.EmployeeService;
+import com.dhenton9000.birt.persistence.service.EmployeesService;
 
 @Service
-public class EmployeeServiceImpl   extends GenericEntityServiceImpl<Employees, Integer> implements EmployeeService {
+public class EmployeesServiceImpl   extends GenericEntityServiceImpl<Employees, Integer> implements EmployeesService {
 
     @PersistenceContext()
     private EntityManager entityManager;

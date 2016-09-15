@@ -6,7 +6,7 @@
 package com.dhenton9000.birt.jersey.resources;
 
  
-import com.dhenton9000.birt.persistence.entities.Employees;
+import com.dhenton9000.birt.persistence.entities.Offices;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
@@ -15,29 +15,29 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.dhenton9000.birt.persistence.service.EmployeesService;
+import com.dhenton9000.birt.persistence.service.OfficesService;
 
 /**
- * Jersey resource object for the employees entity.
+ * Jersey resource object for the offices entity.
  * @author dhenton
  */
 
-@Path("employees")
-@Api(value = "/employees")
+@Path("offices")
+@Api(value = "/offices")
  
-public class EmployeesResources {
+public class OfficesResources {
     
     
      @Autowired
-     private EmployeesService springService;
+     private OfficesService springService;
 
     @GET
     @Path("/get/all")
     @Produces({MediaType.APPLICATION_JSON})
-    @ApiOperation(value = "Get All Employees",notes = "lists all employees at Classic Cars")
+    @ApiOperation(value = "Get All Offices",notes = "lists all employees at Classic Cars")
    
-    public   List<Employees> getAllEmployees() {
-        return springService.getAllEmployees();
+    public   List<Offices> getAllOffices() {
+        return springService.getAllOffices();
         
     }
     

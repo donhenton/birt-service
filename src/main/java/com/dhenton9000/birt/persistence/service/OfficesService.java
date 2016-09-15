@@ -5,14 +5,14 @@
  */
 package com.dhenton9000.birt.persistence.service;
 
-import com.dhenton9000.birt.persistence.entities.Employees;
+import com.dhenton9000.birt.persistence.entities.Offices;
 import java.util.List;
 
 /**
  *
  * @author dhenton
  */
-public interface EmployeeService {
+public interface OfficesService {
     
-    public List<Employees> getAllEmployees();
+    public List<Offices> getAllOffices();
 }
