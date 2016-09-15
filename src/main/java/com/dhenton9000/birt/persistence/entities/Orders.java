@@ -8,32 +8,29 @@ package com.dhenton9000.birt.persistence.entities;
 import com.dhenton9000.jpa.domain.Identifiable;
 import static com.dhenton9000.jpa.util.EntityUtils.trimField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
-
-/*
-orderNumber SERIAL PRIMARY KEY,
-  orderDate timestamp NOT NULL,
-  requiredDate timestamp NOT NULL,
-  shippedDate timestamp NULL,
-  status CHAR(15) NOT NULL,
-  comments TEXT NULL,
-  customerNumber INT NOT NULL
-*/
 
 @Entity
 @Table(name = "orders")
@@ -53,6 +50,7 @@ public class Orders implements Serializable, Identifiable<Integer> {
     private String comments;
     private Integer customerNumber;
     private Integer orderNumber;
+    private Set<OrderDetails> orderDetails;
 
     @Override
     @Transient
@@ -224,6 +222,23 @@ public class Orders implements Serializable, Identifiable<Integer> {
      */
     public void setCustomerNumber(Integer customerNumber) {
         this.customerNumber = customerNumber;
+    }
+
+    /**
+     * @return the orderDetails
+     */
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "ORDERNUMBER", nullable = false)
+    @JsonManagedReference
+    public Set<OrderDetails> getOrderDetails() {
+        return orderDetails;
+    }
+
+    /**
+     * @param orderDetails the orderDetails to set
+     */
+    public void setOrderDetails(Set<OrderDetails> orderDetails) {
+        this.orderDetails = orderDetails;
     }
  
  

@@ -5,6 +5,7 @@
     <class>com.dhenton9000.birt.persistence.entities.Employees</class>
     <class>com.dhenton9000.birt.persistence.entities.Offices</class>
     <class>com.dhenton9000.birt.persistence.entities.Customers</class>
+    <class>com.dhenton9000.birt.persistence.entities.OrderDetails</class>
     <class>com.dhenton9000.birt.persistence.entities.Orders</class>
     <properties>
       <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>

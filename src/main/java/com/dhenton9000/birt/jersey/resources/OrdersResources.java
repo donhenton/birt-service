@@ -22,8 +22,8 @@ import com.dhenton9000.birt.persistence.service.OrdersService;
  * @author dhenton
  */
 
-@Path("Orders")
-@Api(value = "/Orders")
+@Path("orders")
+@Api(value = "/orders")
  
 public class OrdersResources {
     
