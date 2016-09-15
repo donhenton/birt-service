@@ -9,7 +9,7 @@ import java.util.List;
  *
  * @author dhenton
  */
-public interface EmployeeDao extends GenericDao<Employees, Integer> {
+public interface EmployeesDao extends GenericDao<Employees, Integer> {
     
     public List<Employees> getAllEmployees();
 }

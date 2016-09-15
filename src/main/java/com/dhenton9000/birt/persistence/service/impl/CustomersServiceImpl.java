@@ -5,7 +5,7 @@
  */
 package com.dhenton9000.birt.persistence.service.impl;
 
-import com.dhenton9000.birt.persistence.entities.Employees;
+import com.dhenton9000.birt.persistence.entities.Customers;
 import com.dhenton9000.jpa.dao.support.GenericDao;
 import com.dhenton9000.jpa.service.support.GenericEntityServiceImpl;
 import java.util.List;
@@ -13,45 +13,45 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.dhenton9000.birt.persistence.service.EmployeesService;
-import com.dhenton9000.birt.persistence.dao.EmployeesDao;
+import com.dhenton9000.birt.persistence.service.CustomersService;
+import com.dhenton9000.birt.persistence.dao.CustomersDao;
 
 @Service
-public class EmployeesServiceImpl   extends GenericEntityServiceImpl<Employees, Integer> implements EmployeesService {
+public class CustomersServiceImpl   extends GenericEntityServiceImpl<Customers, Integer> implements CustomersService {
 
     @PersistenceContext()
     private EntityManager entityManager;
     @Autowired
-    private EmployeesDao employeeDao;
+    private CustomersDao employeeDao;
  
  
 
     @Override
-    public List<Employees> getAllEmployees() {
+    public List<Customers> getAllCustomers() {
 
-        return getEmployeeDao().getAllEmployees();
+        return getEmployeeDao().getAllCustomers();
     }
 
     /**
      * @return the restaurantDao
      */
-    public EmployeesDao getEmployeeDao() {
+    public CustomersDao getEmployeeDao() {
         return employeeDao;
     }
 
     @Override
-    public GenericDao<Employees, Integer> getDao() {
+    public GenericDao<Customers, Integer> getDao() {
          return employeeDao;
     }
 
     @Override
-    public Employees getNew() {
-         return new Employees();
+    public Customers getNew() {
+         return new Customers();
     }
 
     @Override
-    public Employees getNewWithDefaults() {
-        return new Employees();
+    public Customers getNewWithDefaults() {
+        return new Customers();
     }
     
 }

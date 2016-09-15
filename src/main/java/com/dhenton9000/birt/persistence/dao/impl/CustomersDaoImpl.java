@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.dhenton9000.birt.persistence.dao.impl;
 
  
-import com.dhenton9000.birt.persistence.dao.EmployeeDao;
-import com.dhenton9000.birt.persistence.entities.Employees;
+import com.dhenton9000.birt.persistence.entities.Customers;
 import com.dhenton9000.jpa.dao.hibernate.BaseHibernateGenericDaoImpl;
 import com.dhenton9000.jpa.dao.support.NamedQueryUtil;
 import com.dhenton9000.jpa.dao.support.SearchTemplate;
@@ -18,16 +13,17 @@ import javax.persistence.PersistenceContext;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import com.dhenton9000.birt.persistence.dao.CustomersDao;
 
 @Repository
-public class EmployeeDaoImpl
-        extends BaseHibernateGenericDaoImpl<Employees, Integer>
-        implements EmployeeDao {
+public class CustomersDaoImpl
+        extends BaseHibernateGenericDaoImpl<Customers, Integer>
+        implements CustomersDao {
 
-    private static Logger  log = LoggerFactory.getLogger(EmployeeDaoImpl.class);
+    private static Logger  log = LoggerFactory.getLogger(CustomersDaoImpl.class);
 
-    public EmployeeDaoImpl() {
-        super(Employees.class);
+    public CustomersDaoImpl() {
+        super(Customers.class);
     }
 
     @PersistenceContext
@@ -44,12 +40,12 @@ public class EmployeeDaoImpl
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<Employees> getAllEmployees() {
+    public List<Customers> getAllCustomers() {
 
         SearchTemplate template = new SearchTemplate();
-        template.setNamedQuery("Employees.findAll");
+        template.setNamedQuery("Customers.findAll");
 
-        List<Employees> res = this.find(new Employees(), template);
+        List<Customers> res = this.find(new Customers(), template);
 
         return res;
     }
