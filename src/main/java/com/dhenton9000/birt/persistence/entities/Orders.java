@@ -7,6 +7,7 @@ package com.dhenton9000.birt.persistence.entities;
 
 import com.dhenton9000.jpa.domain.Identifiable;
 import static com.dhenton9000.jpa.util.EntityUtils.trimField;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.swagger.annotations.ApiModel;
@@ -22,6 +23,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -41,13 +43,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Orders implements Serializable, Identifiable<Integer> {
 
-    
-    private Date  orderDate;
-    private Date  requiredDate;
-    private Date  shippedDate;
+    private Date orderDate;
+    private Date requiredDate;
+    private Date shippedDate;
     private String status;
     private String comments;
-    private Integer customerNumber;
+    private Customers customer;
     private Integer orderNumber;
     private Set<OrderDetails> orderDetails;
 
@@ -76,7 +77,6 @@ public class Orders implements Serializable, Identifiable<Integer> {
         return this.getOrderNumber() != null;
     }
 
-    
     @Id
     @Basic(optional = false)
     @Column(name = "ORDERNUMBER", nullable = false)
@@ -88,7 +88,6 @@ public class Orders implements Serializable, Identifiable<Integer> {
         this.orderNumber = n;
     }
 
-     
     @Column(name = "ORDERDATE")
     @Temporal(TemporalType.TIMESTAMP)
     @ApiModelProperty(example = "2/2/2014", required = true)
@@ -140,7 +139,6 @@ public class Orders implements Serializable, Identifiable<Integer> {
         this.shippedDate = rDate;
     }
 
-     
     @Column(name = "STATUS", length = 15)
     @ApiModelProperty(example = "DONE", required = true)
     @Basic(optional = false)
@@ -155,7 +153,6 @@ public class Orders implements Serializable, Identifiable<Integer> {
         this.status = st;
     }
 
-     
     @Column(name = "COMMENTS", length = 50)
     @ApiModelProperty(example = "stuff", required = true)
     @Basic(optional = false)
@@ -170,9 +167,6 @@ public class Orders implements Serializable, Identifiable<Integer> {
         this.comments = comments;
     }
 
-    
-
-   
     @Override
     public int hashCode() {
         int hash = 7;
@@ -201,18 +195,19 @@ public class Orders implements Serializable, Identifiable<Integer> {
     /**
      * @return the customerNumber
      */
-    @Column(name = "CUSTOMERNUMBER")
-    @ApiModelProperty(example = "33", required = true)
-    @Basic(optional = false)
-    public Integer getCustomerNumber() {
-        return customerNumber;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "CUSTOMERNUMBER", referencedColumnName = "CUSTOMERNUMBER", nullable = false,
+            insertable = false, updatable = false)
+    @JsonBackReference
+    public Customers getCustomer() {
+        return customer;
     }
 
     /**
-     * @param customerNumber the customerNumber to set
+     * @param c
      */
-    public void setCustomerNumber(Integer customerNumber) {
-        this.customerNumber = customerNumber;
+    public void setCustomer(Customers c) {
+        this.customer = c;
     }
 
     /**
@@ -231,7 +226,5 @@ public class Orders implements Serializable, Identifiable<Integer> {
     public void setOrderDetails(Set<OrderDetails> orderDetails) {
         this.orderDetails = orderDetails;
     }
- 
- 
 
 }

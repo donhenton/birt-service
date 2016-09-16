@@ -15,9 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.dhenton9000.birt.persistence.service.EmployeesService;
 import com.dhenton9000.birt.persistence.dao.EmployeesDao;
+import com.dhenton9000.birt.persistence.entities.Orders;
 
 @Service
-public class EmployeesServiceImpl   extends GenericEntityServiceImpl<Employees, Integer> implements EmployeesService {
+public class EmployeesServiceImpl   extends GenericEntityServiceImpl<Employees, 
+        Integer> implements EmployeesService {
 
     @PersistenceContext()
     private EntityManager entityManager;
@@ -25,6 +27,11 @@ public class EmployeesServiceImpl   extends GenericEntityServiceImpl<Employees, 
     private EmployeesDao employeeDao;
  
  
+    @Override
+    public List<Orders> getOrdersForEmployee(Integer employeeId)
+    {
+        return getEmployeeDao().getOrdersForEmployee(employeeId);
+    }
 
     @Override
     public List<Employees> getAllEmployees() {

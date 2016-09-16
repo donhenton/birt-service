@@ -14,6 +14,9 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.dhenton9000.birt.persistence.dao.CustomersDao;
+import com.dhenton9000.birt.persistence.entities.Orders;
+import java.util.ArrayList;
+import java.util.Set;
 
 @Repository
 public class CustomersDaoImpl
@@ -49,6 +52,18 @@ public class CustomersDaoImpl
 
         return res;
     }
+    
+     @Override
+    public List<Orders> getCustomerOrders(Integer id) {
+        SearchTemplate template = new SearchTemplate();
+        template.setNamedQuery("Customers.findByid");
+        template.addParameter("id", id);
+        Customers c = this.findById(id);
+         
+        return new ArrayList(c.getOrders());
+    }
+    
+    
 /*
     @Override
     public List<Restaurant> getRestaurantsWithMaxRating(int ratingLimit) {
@@ -72,4 +87,6 @@ public class CustomersDaoImpl
         return found;
     }
 */
+
+   
 }

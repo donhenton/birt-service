@@ -18,6 +18,8 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.dhenton9000.birt.persistence.dao.EmployeesDao;
+import com.dhenton9000.birt.persistence.entities.Orders;
+import javax.persistence.Query;
 
 @Repository
 public class EmployeesDaoImpl
@@ -76,4 +78,20 @@ public class EmployeesDaoImpl
         return found;
     }
 */
+
+    @Override
+    public List<Orders> getOrdersForEmployee(Integer employeeId) {
+        
+       
+        String qString = "select o from Orders o "
+                + " join  o.customer   cust "
+                + "join  cust.employee   e "
+                + "where e.employeeNumber = :id ";
+        
+        Query q = this.getEntityManager().createQuery(qString,Orders.class);
+        q.setParameter("id", employeeId);
+        List<Orders> orders = q.getResultList();
+        
+        return orders;
+    }
 }

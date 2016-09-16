@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.dhenton9000.birt.persistence.service.CustomersService;
 import com.dhenton9000.birt.persistence.dao.CustomersDao;
+import com.dhenton9000.birt.persistence.entities.Orders;
 
 @Service
 public class CustomersServiceImpl   extends GenericEntityServiceImpl<Customers, Integer> implements CustomersService {
@@ -22,26 +23,32 @@ public class CustomersServiceImpl   extends GenericEntityServiceImpl<Customers, 
     @PersistenceContext()
     private EntityManager entityManager;
     @Autowired
-    private CustomersDao employeeDao;
+    private CustomersDao customerDao;
  
  
+    
+    @Override
+    public List<Orders> getCustomerOrders(Integer id) {
+         return getCustomerDao().getCustomerOrders(id);
+    }
+    
 
     @Override
     public List<Customers> getAllCustomers() {
 
-        return getEmployeeDao().getAllCustomers();
+        return getCustomerDao().getAllCustomers();
     }
 
     /**
      * @return the restaurantDao
      */
-    public CustomersDao getEmployeeDao() {
-        return employeeDao;
+    public CustomersDao getCustomerDao() {
+        return customerDao;
     }
 
     @Override
     public GenericDao<Customers, Integer> getDao() {
-         return employeeDao;
+         return customerDao;
     }
 
     @Override
@@ -53,5 +60,6 @@ public class CustomersServiceImpl   extends GenericEntityServiceImpl<Customers, 
     public Customers getNewWithDefaults() {
         return new Customers();
     }
+
     
 }

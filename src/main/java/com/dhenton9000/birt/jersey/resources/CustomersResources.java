@@ -7,6 +7,7 @@ package com.dhenton9000.birt.jersey.resources;
 
  
 import com.dhenton9000.birt.persistence.entities.Customers;
+import com.dhenton9000.birt.persistence.entities.Orders;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
@@ -16,6 +17,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.dhenton9000.birt.persistence.service.CustomersService;
+import javax.ws.rs.PathParam;
 
 /**
  * Jersey resource object for the Customers entity.
@@ -29,7 +31,7 @@ public class CustomersResources {
     
     
      @Autowired
-     private CustomersService springService;
+     private CustomersService customerService;
 
     @GET
     @Path("/get/all")
@@ -37,9 +39,17 @@ public class CustomersResources {
     @ApiOperation(value = "Get All Customers",notes = "lists all Customers at Classic Cars")
    
     public   List<Customers> getAllCustomers() {
-        return springService.getAllCustomers();
+        return customerService.getAllCustomers();
         
     }
     
-    
+    @GET
+    @Path("/get/orders/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    @ApiOperation(value = "Orders for a customer",notes = "lists orders for a given customer")
+   
+    public   List<Orders> getCustomerOrders(@PathParam("id") Integer id) {
+        return customerService.getCustomerOrders(id);
+        
+    }
 }

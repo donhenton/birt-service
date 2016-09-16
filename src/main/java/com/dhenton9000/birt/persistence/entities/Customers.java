@@ -8,16 +8,23 @@ package com.dhenton9000.birt.persistence.entities;
 import com.dhenton9000.jpa.domain.Identifiable;
 import static com.dhenton9000.jpa.util.EntityUtils.trimField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -26,8 +33,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "customers")
 @ApiModel(description = "the customers entity")
 @NamedQueries({
-    @NamedQuery(name = "Customers.findAll", query = "SELECT e FROM Customers e"),
+    @NamedQuery(name = "Customers.findAll",  query  = "SELECT e FROM Customers e"),
+    @NamedQuery(name = "Customers.orders",   query ="SELECT e.orders from Customers e WHERE e.customerNumber = :id"),
     @NamedQuery(name = "Customers.findByid", query = "SELECT e FROM Customers e WHERE e.customerNumber = :id")})
+    
 
 @XmlRootElement
 public class Customers implements Serializable, Identifiable<Integer> {
@@ -42,9 +51,10 @@ public class Customers implements Serializable, Identifiable<Integer> {
     private String stateName;
     private String country;
     private String postalCode;
-    private Integer employeeNumber;
+    private Employees employee;
     private Float creditLimit;
     private Integer customerNumber;
+    private Set<Orders> orders;
 
     @Override
     @Transient
@@ -268,19 +278,6 @@ public class Customers implements Serializable, Identifiable<Integer> {
         this.city = city;
     }
 
-    @Column(name = "SALESREPEMPLOYEENUMBER", nullable = true)
-    @ApiModelProperty(example = "35", required = false)
-    @Basic(optional = true)
-    public Integer getSalesRepEmployeeNumber() {
-        return employeeNumber;
-    }
-
-    /**
-     * @param employeeNumber the employeeNumber to set
-     */
-    public void setSalesRepEmployeeNumber(Integer employeeNumber) {
-        this.employeeNumber = employeeNumber;
-    }
 
     @Column(name = "CREDITLIMIT", nullable = true)
     @ApiModelProperty(example = "35", required = false)
@@ -294,6 +291,43 @@ public class Customers implements Serializable, Identifiable<Integer> {
      */
     public void setCreditLimit(Float creditLimit) {
         this.creditLimit = creditLimit;
+    }
+
+    /**
+     * @return the orders
+     */
+    
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "CUSTOMERNUMBER")
+    @JsonManagedReference
+    public Set<Orders> getOrders() {
+        return orders;
+    }
+
+    /**
+     * @param orders the orders to set
+     */
+    public void setOrders(Set<Orders> orders) {
+        this.orders = orders;
+    }
+
+    /**
+     * @return the employee
+     */
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name =  "SALESREPEMPLOYEENUMBER", nullable = false)
+    @JsonManagedReference
+    @Basic(optional = false)
+    public Employees getEmployee() {
+        return employee;
+    }
+
+    /**
+     * @param employee the employee to set
+     */
+    public void setEmployee(Employees employee) {
+        this.employee = employee;
     }
 
     

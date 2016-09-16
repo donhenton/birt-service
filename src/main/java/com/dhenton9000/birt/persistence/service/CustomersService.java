@@ -6,7 +6,9 @@
 package com.dhenton9000.birt.persistence.service;
 
 import com.dhenton9000.birt.persistence.entities.Customers;
+import com.dhenton9000.birt.persistence.entities.Orders;
 import java.util.List;
+
 
 /**
  *
@@ -15,4 +17,5 @@ import java.util.List;
 public interface CustomersService {
     
     public List<Customers> getAllCustomers();
+    public List<Orders> getCustomerOrders(Integer id);
 }
