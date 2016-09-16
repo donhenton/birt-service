@@ -6,14 +6,16 @@
 package com.dhenton9000.birt.persistence.entities;
 
 import com.dhenton9000.jpa.domain.Identifiable;
-import static com.dhenton9000.jpa.util.EntityUtils.trimField;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,21 +24,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name = "orderdetails")
 @ApiModel(description = "the orderdetails entity")
-
+@XmlRootElement
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class OrderDetails implements Serializable, Identifiable<Integer> {
 
     private Integer quantityOrdered;
     private Float priceEach;
     private Integer orderLineNumber;
     private Orders orders;
-    private String productCode;
+    private Products product;
     private Integer pid; //fake id 
 
     @Override
@@ -96,30 +101,34 @@ public class OrderDetails implements Serializable, Identifiable<Integer> {
             return false;
         }
         final OrderDetails other = (OrderDetails) obj;
-        if (!Objects.equals(this.productCode, other.productCode)) {
+        if (!Objects.equals(this.orders, other.orders)) {
             return false;
         }
-        if (!Objects.equals(this.pid, other.pid)) {
+        if (!Objects.equals(this.product, other.product)) {
             return false;
         }
         return true;
     }
 
+   
+
     /**
      * @return the productCode
      */
-    @Column(name = "PRODUCTCODE", length = 50)
-    @ApiModelProperty(example = "333", required = true)
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name =  "PRODUCTCODE", nullable = false)
+    @JsonManagedReference
     @Basic(optional = false)
-    public String getProductCode() {
-        return trimField(productCode);
+    public Products getProducts() {
+        return this.product;
     }
 
     /**
-     * @param productCode the productCode to set
+     * @param p
      */
-    public void setProductCode(String productCode) {
-        this.productCode = productCode;
+    public void setProducts(Products p) {
+        this.product  = p;
     }
 
     /**

@@ -32,7 +32,7 @@ import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
-@Table(name = "ProductLines")
+@Table(name = "productlines")
 @ApiModel(description = "the productline entity")
 @NamedQueries({
     @NamedQuery(name = "ProductLines.findAll", query = "SELECT e FROM ProductLines e"),

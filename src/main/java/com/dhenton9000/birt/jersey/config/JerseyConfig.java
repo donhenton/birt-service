@@ -11,7 +11,6 @@ import com.dhenton9000.birt.jersey.util.CORSResponseFilter;
 import com.dhenton9000.birt.jersey.util.LoggingResponseFilter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import io.swagger.jaxrs.config.BeanConfig;
- 
 
 //import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -23,20 +22,18 @@ import org.glassfish.jersey.server.spring.SpringComponentProvider;
  *
  * @author dhenton
  */
-
 public class JerseyConfig extends ResourceConfig {
 
     /**
      * Register JAX-RS application components.
      */
-     
     public JerseyConfig() {
         register(RequestContextFilter.class);
         register(new JsonProvider());
-     
+
         packages("com.dhenton9000.birt.jersey.resources");
         packages("io.swagger.jaxrs.listing");
-		
+
         register(LoggingResponseFilter.class);
         register(CORSResponseFilter.class);
         register(SpringComponentProvider.class);
@@ -47,12 +44,11 @@ public class JerseyConfig extends ResourceConfig {
         beanConfig.setSchemes(new String[]{"http"});
         //beanConfig.setHost("localhost:8090");
         beanConfig.setBasePath("/"); //this adjusts swagger output by the web context
-       // beanConfig.setResourcePackage("io.swagger.resources");
-       // comma delimited list of packages
-       // beanConfig.setResourcePackage("com.dhenton9000.birt.jersey.resources,com.dhenton9000.jersey.template.resources");
-       beanConfig.setResourcePackage("io.swagger.resources,com.dhenton9000.birt.jersey.resources");
+        // beanConfig.setResourcePackage("io.swagger.resources");
+        // comma delimited list of packages
+        // beanConfig.setResourcePackage("com.dhenton9000.birt.jersey.resources,com.dhenton9000.jersey.template.resources");
+        beanConfig.setResourcePackage("io.swagger.resources,com.dhenton9000.birt.jersey.resources");
         beanConfig.setScan(true);
-
 
     }
 
