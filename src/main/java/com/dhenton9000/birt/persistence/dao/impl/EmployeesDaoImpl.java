@@ -77,20 +77,29 @@ public class EmployeesDaoImpl
         List<Restaurant> found = this.find(new Restaurant(), template);
         return found;
     }
+    
+    String query = "SELECT NEW CustomObject(i.firstProperty, i.secondProperty) FROM ObjectName i WHERE i.id=10";
+TypedQuery<CustomObject> typedQuery = em.createQuery(query , CustomObject.class);
+List<CustomObject> results = typedQuery.getResultList();
+    
+    
 */
-
+//http://www.objectdb.com/java/jpa/query/jpql/select
     @Override
     public List<Orders> getOrdersForEmployee(Integer employeeId) {
         
        
-        String qString = "select o from Orders o "
+        String qString = "select o "
+                + " from Orders o "
                 + " join  o.customer   cust "
-                + "join  cust.employee   e "
-                + "where e.employeeNumber = :id ";
+                + " join  cust.employee   e "
+                + " where e.employeeNumber = :id ";
         
-        Query q = this.getEntityManager().createQuery(qString,Orders.class);
+        Query q = this.getEntityManager().createQuery(qString);
         q.setParameter("id", employeeId);
-        List<Orders> orders = q.getResultList();
+        List orders = q.getResultList();
+        
+      //   http://www.objectdb.com/java/jpa/query/jpql/select
         
         return orders;
     }
