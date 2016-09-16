@@ -77,9 +77,7 @@ public class Orders implements Serializable, Identifiable<Integer> {
         return this.getOrderNumber() != null;
     }
 
-    /**
-     * @return the officeCode
-     */
+    
     @Id
     @Basic(optional = false)
     @Column(name = "ORDERNUMBER", nullable = false)
@@ -91,9 +89,7 @@ public class Orders implements Serializable, Identifiable<Integer> {
         this.orderNumber = n;
     }
 
-    /**
-     * @return the phone
-     */
+     
     @Column(name = "ORDERDATE")
     @Temporal(TemporalType.TIMESTAMP)
     @ApiModelProperty(example = "2/2/2014", required = true)
@@ -145,9 +141,7 @@ public class Orders implements Serializable, Identifiable<Integer> {
         this.shippedDate = rDate;
     }
 
-    /**
-     * @return the state
-     */
+     
     @Column(name = "STATUS", length = 15)
     @ApiModelProperty(example = "DONE", required = true)
     @Basic(optional = false)
@@ -162,9 +156,7 @@ public class Orders implements Serializable, Identifiable<Integer> {
         this.status = st;
     }
 
-    /**
-     * @return the country
-     */
+     
     @Column(name = "COMMENTS", length = 50)
     @ApiModelProperty(example = "stuff", required = true)
     @Basic(optional = false)

@@ -235,13 +235,7 @@ public class Employees implements Serializable, Identifiable<Integer> {
         return offices;
     }
 
-    /**
-     * @param parent the parent to set
-     */
-    public void setRestaurant(Offices parent) {
-        this.setOffices(parent);
-    }
-
+   
     /**
      * @param offices the offices to set
      */
