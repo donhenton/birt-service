@@ -39,6 +39,17 @@ public class EmployeesServiceImpl   extends GenericEntityServiceImpl<Employees,
 
         return getEmployeeDao().getAllEmployees();
     }
+    
+    @Override
+    public List<Employees> getEmployeesForOffice(String officeCode) {
+        return getEmployeeDao().getEmployeesForOffice(officeCode);
+    }
+    
+    @Override
+    public Employees getById(Integer employeeId)
+    {
+        return getEmployeeDao().getById(employeeId);
+    }
 
     /**
      * @return the restaurantDao
@@ -66,5 +77,7 @@ public class EmployeesServiceImpl   extends GenericEntityServiceImpl<Employees,
     public List<SalesReport> getSalesData() {
           return getEmployeeDao().getSalesData();
     }
+
+    
     
 }

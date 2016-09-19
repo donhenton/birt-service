@@ -7,6 +7,7 @@ package com.dhenton9000.birt.persistence.entities;
 
 import com.dhenton9000.jpa.domain.Identifiable;
 import static com.dhenton9000.jpa.util.EntityUtils.trimField;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.swagger.annotations.ApiModel;
@@ -316,8 +317,8 @@ public class Customers implements Serializable, Identifiable<Integer> {
      */
     
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name =  "SALESREPEMPLOYEENUMBER", nullable = false)
-    @JsonManagedReference
+    @JoinColumn(name =  "SALESREPEMPLOYEENUMBER", insertable = false, updatable=false, nullable = false)
+    @JsonBackReference
     @Basic(optional = false)
     public Employees getEmployee() {
         return employee;

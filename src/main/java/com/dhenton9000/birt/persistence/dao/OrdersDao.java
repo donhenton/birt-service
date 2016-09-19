@@ -12,4 +12,5 @@ import java.util.List;
 public interface OrdersDao extends GenericDao<Orders, Integer> {
     
     public List<Orders> getAllOrders();
+    public List<Orders> getOrdersForOffice(String officeCode);
 }

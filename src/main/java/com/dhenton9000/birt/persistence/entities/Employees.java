@@ -21,11 +21,15 @@ import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import static com.dhenton9000.jpa.util.EntityUtils.trimField;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 @Table(name = "Employees")
@@ -46,6 +50,7 @@ public class Employees implements Serializable, Identifiable<Integer> {
     private String jobTitle;
     private Integer reportsTo;
     private Offices offices;
+    private Set<Customers> customers;
 
     @Id
 
@@ -160,8 +165,6 @@ public class Employees implements Serializable, Identifiable<Integer> {
         this.email = email;
     }
 
- 
-
     /**
      * @return the jobTitle
      */
@@ -226,7 +229,6 @@ public class Employees implements Serializable, Identifiable<Integer> {
         return "Employee{" + "employeeNumber=" + employeeNumber + ", lastName=" + lastName + '}';
     }
 
-    
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "OFFICECODE", referencedColumnName = "OFFICECODE", nullable = false,
             insertable = false, updatable = false)
@@ -235,7 +237,6 @@ public class Employees implements Serializable, Identifiable<Integer> {
         return offices;
     }
 
-   
     /**
      * @param offices the offices to set
      */
@@ -243,8 +244,21 @@ public class Employees implements Serializable, Identifiable<Integer> {
         this.offices = offices;
     }
 
-    
-    
-    
-    
+    /**
+     *  name in join column refer to target table customers
+     */
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "SALESREPEMPLOYEENUMBER", referencedColumnName ="EMPLOYEENUMBER" , nullable = false)
+    @JsonManagedReference
+    public Set<Customers> getCustomers() {
+        return customers;
+    }
+
+    /**
+     * @param customers the customers to set
+     */
+    public void setCustomers(Set<Customers> customers) {
+        this.customers = customers;
+    }
+
 }

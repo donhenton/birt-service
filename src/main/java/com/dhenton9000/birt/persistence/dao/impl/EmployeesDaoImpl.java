@@ -56,6 +56,14 @@ public class EmployeesDaoImpl
 
         return res;
     }
+    
+     @Override
+    public Employees getById(Integer employeeId) {
+        
+         return this.findById(employeeId);
+    }
+    
+    
 /*
     @Override
     public List<Restaurant> getRestaurantsWithMaxRating(int ratingLimit) {
@@ -128,5 +136,26 @@ List<CustomObject> results = typedQuery.getResultList();
         
         return salesData;
     }
+
+    @Override
+    public List<Employees> getEmployeesForOffice(String officeCode) {
+        
+        
+        String qString = "select employees from "
+                + "Offices o join o.employees employees "
+                + "where o.officeCode = :id ";
+                
+        Query q = this.getEntityManager().createQuery(qString);
+        q.setParameter("id", officeCode);
+        log.debug("office code is "+officeCode);
+        List<Employees> officeEmployees = q.getResultList();
+        
+      //   http://www.objectdb.com/java/jpa/query/jpql/select
+        
+        return officeEmployees;
+         
+    }
+
+   
     
 }

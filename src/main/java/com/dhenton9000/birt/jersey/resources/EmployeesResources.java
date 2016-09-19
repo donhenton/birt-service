@@ -51,6 +51,14 @@ public class EmployeesResources {
     }
 
     @GET
+    @Path("/get/employee/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    @ApiOperation(value = "Get Employee by id", notes = "get the employee")
+    public Employees getById(@PathParam("id") Integer employeeId) {
+        return springService.getById(employeeId);
+    }
+
+    @GET
     @Path("/get/employee/salesdata")
     @Produces({MediaType.APPLICATION_JSON})
     @ApiOperation(value = "Get Sales For Employees", notes = "sales for all employees")

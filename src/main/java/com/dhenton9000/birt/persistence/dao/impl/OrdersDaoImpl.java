@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.dhenton9000.birt.persistence.dao.OrdersDao;
+import javax.persistence.Query;
 
 @Repository
 public class OrdersDaoImpl
@@ -72,4 +73,17 @@ public class OrdersDaoImpl
         return found;
     }
 */
+
+    @Override
+    public List<Orders> getOrdersForOffice(String officeCode) {
+        String qString = "select o "
+                + " from Offices offices "
+                + " join  office.employees   employees "
+                + " join  employees.   e "
+                + " where e.employeeNumber = :id ";
+        
+        Query q = this.getEntityManager().createQuery(qString);
+        q.setParameter("id", officeCode);
+        return   q.getResultList();
+    }
 }

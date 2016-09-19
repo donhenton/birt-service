@@ -7,6 +7,7 @@ package com.dhenton9000.birt.jersey.resources;
 
  
 import com.dhenton9000.birt.persistence.entities.Offices;
+import com.dhenton9000.birt.persistence.service.EmployeesService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
@@ -16,6 +17,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.dhenton9000.birt.persistence.service.OfficesService;
+import javax.ws.rs.PathParam;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Jersey resource object for the offices entity.
@@ -27,9 +31,11 @@ import com.dhenton9000.birt.persistence.service.OfficesService;
  
 public class OfficesResources {
     
-    
+    private static Logger  log = LoggerFactory.getLogger(OfficesResources.class);
      @Autowired
      private OfficesService springService;
+     @Autowired
+     private EmployeesService employeesService;
 
     @GET
     @Path("/get/all")
@@ -41,5 +47,14 @@ public class OfficesResources {
         
     }
     
+    
+    @GET
+    @Path("/get/{officeCode}/employees")
+    @ApiOperation(value = "Get Employees for an Office", notes = "lists all employees at Classic Cars in this office")
+    public   OfficesEmployeesResource getEmployeesForOffice(@PathParam("officeCode") String officeCode) {
+        
+        return  new OfficesEmployeesResource(officeCode,employeesService);
+        
+    }
     
 }

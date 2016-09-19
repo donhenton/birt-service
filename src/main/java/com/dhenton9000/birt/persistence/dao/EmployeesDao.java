@@ -16,5 +16,7 @@ public interface EmployeesDao extends GenericDao<Employees, Integer> {
     public List<Employees> getAllEmployees();
     public List<Orders> getOrdersForEmployee(Integer employeeId);
     public List<SalesReport> getSalesData();
+    public List<Employees> getEmployeesForOffice(String officeCode);
+    public Employees getById(Integer employeeId);
     
 }
