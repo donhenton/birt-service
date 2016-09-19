@@ -1,2 +1,0 @@
-
-select e.employeeNumber, SUM(o.orderDetails.priceEach)  from com.dhenton9000.birt.persistence.entities.Orders o  join  o.customer   cust  join  cust.employee   e  GROUP BY e.employeeNumber where e.employeeNumber = :id 
