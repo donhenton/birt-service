@@ -5,7 +5,6 @@
  */
 package com.dhenton9000.birt.jersey.resources;
 
- 
 import com.dhenton9000.birt.persistence.entities.Customers;
 import com.dhenton9000.birt.persistence.entities.Orders;
 import io.swagger.annotations.Api;
@@ -21,35 +20,34 @@ import javax.ws.rs.PathParam;
 
 /**
  * Jersey resource object for the Customers entity.
+ *
  * @author dhenton
  */
+@Path("customers")
+@Api(value = "/customers")
 
-@Path("Customers")
-@Api(value = "/Customers")
- 
 public class CustomersResources {
-    
-    
-     @Autowired
-     private CustomersService customerService;
+
+    @Autowired
+    private CustomersService customerService;
 
     @GET
     @Path("/get/all")
     @Produces({MediaType.APPLICATION_JSON})
-    @ApiOperation(value = "Get All Customers",notes = "lists all Customers at Classic Cars")
-   
-    public   List<Customers> getAllCustomers() {
+    @ApiOperation(value = "Get All Customers", notes = "lists all Customers at Classic Cars")
+
+    public List<Customers> getAllCustomers() {
         return customerService.getAllCustomers();
-        
+
     }
-    
+
     @GET
     @Path("/get/orders/{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    @ApiOperation(value = "Orders for a customer",notes = "lists orders for a given customer")
-   
-    public   List<Orders> getCustomerOrders(@PathParam("id") Integer id) {
+    @ApiOperation(value = "Orders for a customer", notes = "lists orders for a given customer")
+
+    public List<Orders> getCustomerOrders(@PathParam("id") Integer id) {
         return customerService.getCustomerOrders(id);
-        
+
     }
 }
