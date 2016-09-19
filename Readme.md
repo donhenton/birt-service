@@ -1,13 +1,17 @@
 #Urls
 
+If run via the netbeans custom method:
 
-Swagger api-docs: http://localhost:8090/<app-name>/swagger.json
 
-Wadl: http://localhost:8090/<app-name>/application.wadl
 
-Schema: http://localhost:8090/<app-name>/application.wadl/xsd0.xsd
+Swagger api-docs: http://localhost:8090
 
-Demo Service: http://localhost:8090/<app-name>/demo/model
+Wadl: http://localhost:8090/application.wadl
+
+Schema: http://localhost:8090/application.wadl/xsd0.xsd
+
+Heroku URL: http://donhenton-birt-service.herokuapp.com/
+
 
 
 ## Documentation
