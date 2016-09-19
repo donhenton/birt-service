@@ -4,6 +4,7 @@ import com.dhenton9000.jpa.domain.Identifiable;
 import static com.dhenton9000.jpa.util.EntityUtils.trimField;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
@@ -27,7 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Products.findAll", query = "SELECT e FROM Products e"),
     @NamedQuery(name = "Products.findByid", query = "SELECT e FROM Products e WHERE e.productCode = :id")})
-
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @XmlRootElement
 public class Products implements Serializable, Identifiable<String> {
 

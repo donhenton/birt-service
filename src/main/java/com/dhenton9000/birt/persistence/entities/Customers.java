@@ -9,6 +9,7 @@ import com.dhenton9000.jpa.domain.Identifiable;
 import static com.dhenton9000.jpa.util.EntityUtils.trimField;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -38,7 +39,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Customers.orders",   query ="SELECT e.orders from Customers e WHERE e.customerNumber = :id"),
     @NamedQuery(name = "Customers.findByid", query = "SELECT e FROM Customers e WHERE e.customerNumber = :id")})
     
-
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @XmlRootElement
 public class Customers implements Serializable, Identifiable<Integer> {
 

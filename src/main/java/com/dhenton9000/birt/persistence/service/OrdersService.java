@@ -15,4 +15,5 @@ import java.util.List;
 public interface OrdersService {
     
     public List<Orders> getAllOrders();
+    public List<Orders> getOrdersForOffice(String officeCode);
 }

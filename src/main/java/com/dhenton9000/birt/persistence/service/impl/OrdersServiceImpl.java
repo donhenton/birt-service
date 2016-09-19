@@ -22,26 +22,32 @@ public class OrdersServiceImpl   extends GenericEntityServiceImpl<Orders, Intege
     @PersistenceContext()
     private EntityManager entityManager;
     @Autowired
-    private OrdersDao employeeDao;
+    private OrdersDao ordersDao;
  
  
 
     @Override
     public List<Orders> getAllOrders() {
 
-        return getEmployeeDao().getAllOrders();
+        return getOrdersDao().getAllOrders();
+    }
+    
+    @Override
+    public List<Orders> getOrdersForOffice(String officeCode)
+    {
+        return getOrdersDao().getOrdersForOffice(officeCode);
     }
 
     /**
      * @return the restaurantDao
      */
-    public OrdersDao getEmployeeDao() {
-        return employeeDao;
+    public OrdersDao getOrdersDao() {
+        return ordersDao;
     }
 
     @Override
     public GenericDao<Orders, Integer> getDao() {
-         return employeeDao;
+         return ordersDao;
     }
 
     @Override

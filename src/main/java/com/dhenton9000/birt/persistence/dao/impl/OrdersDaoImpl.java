@@ -76,11 +76,12 @@ public class OrdersDaoImpl
 
     @Override
     public List<Orders> getOrdersForOffice(String officeCode) {
-        String qString = "select o "
+        String qString = "select orders "
                 + " from Offices offices "
-                + " join  office.employees   employees "
-                + " join  employees.   e "
-                + " where e.employeeNumber = :id ";
+                + " join  offices.employees   employees "
+                + " join  employees.customers   customers "
+                + " join  customers.orders   orders "
+                + " where offices.officeCode = :id ";
         
         Query q = this.getEntityManager().createQuery(qString);
         q.setParameter("id", officeCode);

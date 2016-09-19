@@ -21,6 +21,7 @@ import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import static com.dhenton9000.jpa.util.EntityUtils.trimField;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -37,7 +38,7 @@ import javax.persistence.OneToMany;
 @NamedQueries({
     @NamedQuery(name = "Employees.findAll", query = "SELECT e FROM Employees e"),
     @NamedQuery(name = "Employees.findByid", query = "SELECT e FROM Employees e WHERE e.employeeNumber = :id")})
-
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @XmlRootElement
 public class Employees implements Serializable, Identifiable<Integer> {
 
