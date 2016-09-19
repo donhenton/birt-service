@@ -7,6 +7,7 @@ package com.dhenton9000.birt.persistence.service;
 
 import com.dhenton9000.birt.persistence.entities.Employees;
 import com.dhenton9000.birt.persistence.entities.Orders;
+import com.dhenton9000.birt.persistence.entities.SalesReport;
 import java.util.List;
 
 /**
@@ -16,5 +17,6 @@ import java.util.List;
 public interface EmployeesService {
     
     public List<Employees> getAllEmployees();
-    List<Orders> getOrdersForEmployee(Integer employeeId);
+    public List<Orders> getOrdersForEmployee(Integer employeeId);
+    public List<SalesReport> getSalesData();
 }

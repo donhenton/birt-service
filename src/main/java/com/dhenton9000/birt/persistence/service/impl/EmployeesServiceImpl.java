@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import com.dhenton9000.birt.persistence.service.EmployeesService;
 import com.dhenton9000.birt.persistence.dao.EmployeesDao;
 import com.dhenton9000.birt.persistence.entities.Orders;
+import com.dhenton9000.birt.persistence.entities.SalesReport;
 
 @Service
 public class EmployeesServiceImpl   extends GenericEntityServiceImpl<Employees, 
@@ -59,6 +60,11 @@ public class EmployeesServiceImpl   extends GenericEntityServiceImpl<Employees,
     @Override
     public Employees getNewWithDefaults() {
         return new Employees();
+    }
+
+    @Override
+    public List<SalesReport> getSalesData() {
+          return getEmployeeDao().getSalesData();
     }
     
 }

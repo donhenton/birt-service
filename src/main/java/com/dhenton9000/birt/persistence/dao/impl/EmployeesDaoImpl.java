@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.dhenton9000.birt.persistence.dao.EmployeesDao;
 import com.dhenton9000.birt.persistence.entities.Orders;
+import com.dhenton9000.birt.persistence.entities.SalesReport;
 import javax.persistence.Query;
 
 @Repository
@@ -103,4 +104,29 @@ List<CustomObject> results = typedQuery.getResultList();
         
         return orders;
     }
+    
+    @Override
+    public List<SalesReport> getSalesData() {
+        
+       
+        String qString = "select  new com.dhenton9000.birt."
+                + "persistence.entities.SalesReport(e.firstName, e.lastName,"
+                + "SUM(details.priceEach),e.employeeNumber)"
+                + " from  Orders o"
+                + " join  o.orderDetails details"
+                + " join  o.customer   cust "
+                + " join  cust.employee   e "
+                + " GROUP BY e.employeeNumber"
+                + " ORDER BY e.lastName, e.firstName";
+                
+        
+        Query q = this.getEntityManager().createQuery(qString);
+        //q.setParameter("id", employeeId);
+        List<SalesReport> salesData = q.getResultList();
+        
+      //   http://www.objectdb.com/java/jpa/query/jpql/select
+        
+        return salesData;
+    }
+    
 }

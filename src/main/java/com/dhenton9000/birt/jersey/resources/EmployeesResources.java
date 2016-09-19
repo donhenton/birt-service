@@ -7,6 +7,7 @@ package com.dhenton9000.birt.jersey.resources;
 
 import com.dhenton9000.birt.persistence.entities.Employees;
 import com.dhenton9000.birt.persistence.entities.Orders;
+import com.dhenton9000.birt.persistence.entities.SalesReport;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
@@ -44,8 +45,17 @@ public class EmployeesResources {
     @GET
     @Path("/get/employee/orders/{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    @ApiOperation(value = "Get All Employees", notes = "orders for an employee")
+    @ApiOperation(value = "Get Orders for Employee", notes = "orders for an employee")
     public List<Orders> getOrdersForEmployee(@PathParam("id") Integer employeeId) {
         return springService.getOrdersForEmployee(employeeId);
+    }
+
+    @GET
+    @Path("/get/employee/salesdata")
+    @Produces({MediaType.APPLICATION_JSON})
+    @ApiOperation(value = "Get Sales For Employees", notes = "sales for all employees")
+
+    public List<SalesReport> getSalesData() {
+        return springService.getSalesData();
     }
 }
