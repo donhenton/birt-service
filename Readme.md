@@ -10,9 +10,6 @@ Wadl: http://localhost:8090/application.wadl
 
 Schema: http://localhost:8090/application.wadl/xsd0.xsd
 
-Heroku URL: http://donhenton-birt-service.herokuapp.com/
-
-
 
 ## Documentation
 
